@@ -35,6 +35,7 @@ private:
 
     bool inGame;
     bool dir_changed;
+    bool badApple;
     int timerId;
 
     QVector<QPoint> snake;

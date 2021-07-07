@@ -82,13 +82,21 @@ void Game::localApple()
     srand(time(NULL));
     apple.setX(rand() % MAP_WIDTH);
     apple.setY(rand() % MAP_HEIGHT);
+
+    badApple = false;
+    for(int i=0; i<snake.size(); i++){
+        if (snake[i] == apple) {
+            badApple = true;
+            break;
+        }
+    }
 }
 
 void Game::eatingApple()
 {
     if (apple == snake[0]) {
         snake.push_back(QPoint(0,0));
-        localApple();
+        do localApple(); while(badApple);
     }
 }
 
@@ -138,6 +146,7 @@ void Game::initGame(){
     inGame = true;
     dir = right;
     dir_changed = false;
+    badApple = false;
 
     snake.resize(3);
 
@@ -146,7 +155,7 @@ void Game::initGame(){
         snake[i].setY(0);
     }
 
-    localApple();
+    do localApple(); while(badApple);
 
     timerId = startTimer(DELAY);
 }
