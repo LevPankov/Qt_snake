@@ -2,9 +2,11 @@
 #define GAME_H
 
 #include <QWidget>
+#include <QPainter>
 #include <QVector>
 #include <QPoint>
 #include <QKeyEvent>
+#include <QMessageBox>
 
 class Game : public QWidget
 {
@@ -26,9 +28,13 @@ private:
     void initGame();
     void doDrawing();
     void localApple();
+    void eatingApple();
     void move();
+    void checkCrash();
+    void gameOver();
 
     bool inGame;
+    bool dir_changed;
     int timerId;
 
     QVector<QPoint> snake;
